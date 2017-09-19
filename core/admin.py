@@ -2,7 +2,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.contenttypes.admin import GenericStackedInline
-from .models import User, Post, Comment, Like, Event
+from .models import User, Like
 
 
 class UserAdmin(BaseUserAdmin):
@@ -34,20 +34,3 @@ class LikeAbleAdmin(admin.ModelAdmin):
 
     inlines = LikesInline,
 
-
-@admin.register(Post)
-class PostAdmin(LikeAbleAdmin):
-
-    readonly_fields = 'likes_count', 'comments_count', 'edited_count',
-
-
-@admin.register(Comment)
-class CommentAdmin(LikeAbleAdmin):
-
-    readonly_fields = 'likes_count', 'edited_count',
-
-
-@admin.register(Event)
-class CommentAdmin(LikeAbleAdmin):
-
-    pass
