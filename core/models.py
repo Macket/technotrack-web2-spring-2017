@@ -40,7 +40,7 @@ class EventType(Enum):
     Post = 1
     Comment = 2
     Like = 3
-    Subscribe = 4
+    Subscription = 4
 
 
 class Event(ModelWithAuthor, ModelWithDates):

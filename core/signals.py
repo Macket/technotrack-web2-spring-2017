@@ -1,6 +1,6 @@
 # coding: utf-8
-from django.db.models.signals import post_save, post_init, pre_save, post_delete
-from .models import Comment, Post, ModelWithAuthor, LikeAble, Like, Event, EventType
+from django.db.models.signals import post_save, post_init, pre_save, post_delete, m2m_changed
+from .models import Comment, Post, ModelWithAuthor, LikeAble, Like, Event, EventType, User
 
 
 # События
@@ -118,3 +118,17 @@ def like_post_delete(instance, *args, **kwargs):
 
 post_save.connect(like_post_save, Like)
 post_delete.connect(like_post_delete, Like)
+
+# Подписки
+
+
+def subscription(sender, instance, **kwargs):
+
+    if kwargs['action'] == 'post_add':
+        pk_set = kwargs.pop('pk_set', None)
+        for pk in pk_set:
+            title = "{} подписался на {}".format(instance, User.objects.get(pk=pk))
+            make_event(title, instance, User.objects.get(pk=pk), EventType.Subscription)
+
+
+m2m_changed.connect(subscription, sender=User.subscriptions.through)

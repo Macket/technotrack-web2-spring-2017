@@ -8,9 +8,9 @@ from .models import User, Post, Comment, Like, Event
 class UserAdmin(BaseUserAdmin):
 
     fieldsets = BaseUserAdmin.fieldsets + (
-        (u'Дополнительно', {'fields': ('admin_avatar', 'avatar')}),
+        (u'Дополнительно', {'fields': ('admin_avatar', 'avatar', 'subscriptions', 'objects_count')}),
     )
-    readonly_fields = ('admin_avatar', )
+    readonly_fields = ('admin_avatar', 'objects_count')
 
     def admin_avatar(self, instance):
         return instance.avatar and u'<img src="{0}" width="100px" />'.format(
