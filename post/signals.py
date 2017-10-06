@@ -1,7 +1,7 @@
 from django.db.models.signals import post_init, pre_save, post_save
 
 from event.models import make_event, EventType
-from post.models import Post
+from post.models import Post, Book
 
 
 def post_post_init(instance, *args, **kwargs):
@@ -24,6 +24,13 @@ def post_post_save(instance, created=False, *args, **kwargs):
         make_event(instance.get_title_for_event(), instance.author, instance, EventType.Post)
 
 
+def book_post_save(instance, created=False, *args, **kwargs):
+
+    if created:
+        make_event(instance.get_title_for_event(), instance.author, instance, EventType.Book)
+
 post_init.connect(post_post_init, Post)
 pre_save.connect(post_pre_save, Post)
 post_save.connect(post_post_save, Post)
+post_save.connect(book_post_save, Book)
+

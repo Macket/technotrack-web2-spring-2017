@@ -16,9 +16,30 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf import settings
+from rest_framework import routers
+from post import views as post_views
+from core import views as core_views
+from event import views as event_views
+from comment import views as comment_views
+from rest_framework.authtoken import views
+
+
+router = routers.DefaultRouter()
+router.register(r'posts', post_views.PostViewSet)
+router.register(r'books', post_views.BookViewSet)
+router.register(r'profile', core_views.SelfUserViewSet)
+router.register(r'user', core_views.OtherUserViewSet)
+router.register(r'subscriptions', core_views.SubscriptionsViewSet)
+router.register(r'events', event_views.EventViewSet)
+router.register(r'likes', core_views.LikeViewSet)
+router.register(r'comments', comment_views.CommentViewSet)
+
 
 urlpatterns = [
+    url(r'api/v1/', include(router.urls)),
     url(r'^admin/', admin.site.urls),
+    url(r'^api-token-auth/', views.obtain_auth_token),
+    url(r'^social/', include('social_django.urls', namespace='social')),
 ]
 
 if settings.DEBUG:

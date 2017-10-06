@@ -1,8 +1,11 @@
 # coding: utf-8
 from django.db.models.signals import post_save, post_init, pre_save, post_delete, m2m_changed
+from django.dispatch import receiver
 
+from application import settings
 from event.models import make_event, EventType
-from .models import ModelWithAuthor, LikeAble, Like, User
+from .models import ModelWithAuthor, Like, User
+from rest_framework.authtoken.models import Token
 
 
 # Подсчет авторских объектов
@@ -39,7 +42,7 @@ def like_post_save(instance, *args, **kwargs):
 
 def like_post_delete(instance, *args, **kwargs):
 
-    if instance.object.likes_count > 0:
+    if instance.object is not None and instance.object.likes_count > 0:
         instance.object.likes_count -= 1
         instance.object.save()
 
@@ -61,3 +64,11 @@ def subscription(instance, **kwargs):
 
 
 m2m_changed.connect(subscription, sender=User.subscriptions.through)
+
+# Токены
+
+
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    if created:
+        Token.objects.create(user=instance)

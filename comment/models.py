@@ -1,15 +1,19 @@
 # coding: utf-8
 from __future__ import unicode_literals
 
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
 from core.models import ModelWithAuthor, ModelWithDates, LikeAble, WatchableModel
-from post.models import Post
 
 
 class Comment(ModelWithAuthor, ModelWithDates, LikeAble, WatchableModel):
 
-    post = models.ForeignKey(Post)
+    content_type = models.ForeignKey(ContentType, related_name='comments')
+    object_id = models.PositiveIntegerField()
+    object = GenericForeignKey('content_type', 'object_id')
+
     text = models.TextField()
     text_was = None
     edited_count = models.IntegerField(default=0)
@@ -27,3 +31,13 @@ class Comment(ModelWithAuthor, ModelWithDates, LikeAble, WatchableModel):
             return self.text[:15] + '...'
         else:
             return self.text
+
+
+class CommentAble(models.Model):
+
+    comments = GenericRelation(Comment, object_id_field='object_id', content_type_field='content_type',
+                               on_delete=models.CASCADE)
+    comments_count = models.IntegerField(default=0)
+
+    class Meta:
+        abstract = True

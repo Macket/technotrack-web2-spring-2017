@@ -14,6 +14,7 @@ class EventType(Enum):
     Comment = 2
     Like = 3
     Subscription = 4
+    Book = 5
 
 
 class Event(ModelWithAuthor, ModelWithDates):
@@ -23,14 +24,6 @@ class Event(ModelWithAuthor, ModelWithDates):
     object_id = models.PositiveIntegerField()
     object = GenericForeignKey('content_type', 'object_id')
     type = EventType
-
-    def __init__(self, title, author, object, type):
-        ModelWithAuthor.__init__(self)
-        ModelWithDates.__init__(self)
-        self.title = title
-        self.author = author
-        self.object = object
-        self.type = type
 
     class Meta:
         verbose_name = u'Событие'
@@ -42,5 +35,9 @@ class Event(ModelWithAuthor, ModelWithDates):
 
 
 def make_event(title, author, object, type):
-    event = Event(title, author, object, type)
+    event = Event()
+    event.title = title
+    event.author = author
+    event.object = object
+    event.type = type
     event.save()

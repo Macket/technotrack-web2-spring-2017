@@ -11,7 +11,7 @@ class User(AbstractUser):
 
     avatar = models.ImageField(upload_to='avatars', blank=True, null=True)
     objects_count = models.IntegerField(default=0)
-    subscriptions = models.ManyToManyField("self", default=None)
+    subscriptions = models.ManyToManyField("self", default=None, symmetrical=False)
 
     class Meta:
         verbose_name = u'Пользователь'
@@ -46,17 +46,25 @@ class WatchableModel(models.Model):
 
 class Like(ModelWithDates, ModelWithAuthor, WatchableModel):
 
-    content_type = models.ForeignKey(ContentType)
+    content_type = models.ForeignKey(ContentType, related_name='likes')
     object_id = models.PositiveIntegerField()
     object = GenericForeignKey('content_type', 'object_id')
+
+    class Meta:
+        verbose_name = u'Лайк'
+        verbose_name_plural = u'Лайки'
 
     def get_title_for_event(self):
         return "{} поставил лайк {}".format(self.author, self.object)
 
+    def __unicode__(self):
+        return 'author: %s, created %s' % (self.author.username, self.created)
+
 
 class LikeAble(models.Model):
 
-    likes = GenericRelation(Like, object_id_field='object_id', content_type_field='content_type')
+    likes = GenericRelation(Like, object_id_field='object_id', content_type_field='content_type',
+                            on_delete=models.CASCADE)
     likes_count = models.IntegerField(default=0)
 
     class Meta:
