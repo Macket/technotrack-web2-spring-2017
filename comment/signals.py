@@ -9,7 +9,7 @@ def comment_post_init(instance, *args, **kwargs):
     instance.text_was = instance.text
 
 
-# def comment_pre_save(instance, raw, *args, **kwargs):
+# def comment_pre_save(instance, *args, **kwargs):
 #
 #     print "raw: ", raw
 #     print instance.text

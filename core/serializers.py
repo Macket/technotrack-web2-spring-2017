@@ -18,7 +18,7 @@ class SelfUserSerializer(serializers.ModelSerializer):
 
 
 class LikeSerializer(serializers.ModelSerializer):
-    # object = serializers.HyperlinkedRelatedField(many=False, view_name='oblect-detail', read_only=True)
+    object = serializers.HyperlinkedRelatedField(many=False, view_name='object-detail', read_only=True)
 
     class Meta:
         model = Like

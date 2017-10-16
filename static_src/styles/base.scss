@@ -1,0 +1,107 @@
+.base {
+    position: absolute;
+    width: 90%;
+    height: auto;
+    border: solid black 1px;
+    margin-left: 5%;
+    margin-top: 2%;
+    margin-bottom: 0;
+}
+
+.header {
+  position: relative;
+  text-align: right;
+  margin: 0;
+  padding-right: 5%;
+  border: solid black 1px;
+}
+
+.side-menu {
+  position: absolute;
+  width: 20%;
+  height: auto;
+  display: inline-block;
+  padding-top: 10px;
+}
+
+.side-menu-button {
+  display: block;
+  width: 90%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  margin-left: 5%;
+}
+
+.b-post-list {
+    position: relative;
+    width: 70%;
+    height: auto;
+    margin-left: 20%;
+    padding: 20px;
+    border-left: solid black 1px;
+}
+
+.b-wrapper {
+    width: 600px;
+    margin: auto;
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.b-form-field-wrapper {
+    display: block;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.b-form-field {
+    width: 300px;
+}
+
+.b-post__title {
+    display: flex;
+    margin-bottom: 5px;
+    align-items: center;
+    font-weight: bold;
+}
+
+.b-post__likes {
+  text-align: right;
+  margin-top: 5px;
+  margin-bottom: 20px;
+
+}
+
+.b-avatar {
+    display: inline;
+    border-radius: 20px;
+}
+
+.b-user-name {
+    display: inline;
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.b-post__content {
+    margin: 0;
+}
+
+.b-modal_container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 10000;
+}
+
+.b-modal {
+    position: absolute;
+    top: 100px;
+    right: 100px;
+    left: 100px;
+    bottom: 100px;
+    background: blue;
+}

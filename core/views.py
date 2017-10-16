@@ -1,3 +1,4 @@
+from django.views.generic import TemplateView
 from rest_framework import viewsets, views
 
 from core.models import User, Like
@@ -36,3 +37,8 @@ class SubscriptionsViewSet(viewsets.ReadOnlyModelViewSet):
 class LikeViewSet(viewsets.ModelViewSet):
     serializer_class = LikeSerializer
     queryset = Like.objects.all()
+
+
+class IndexView(TemplateView):
+
+    template_name = "index.html"
