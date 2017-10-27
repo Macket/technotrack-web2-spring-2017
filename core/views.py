@@ -1,17 +1,15 @@
 from django.views.generic import TemplateView
-from rest_framework import viewsets, views
-
+from rest_framework import viewsets, generics
 from core.models import User, Like
-from core.serializers import SelfUserSerializer, OtherUserSerializer, LikeSerializer
+from core.serializers import SelfUserSerializer, OtherUserSerializer, LikeSerializer, SubscribesSerializer
 
 
-class SelfUserViewSet(viewsets.ModelViewSet):
+class SelfUserView(generics.RetrieveUpdateDestroyAPIView):
+    model = User
     serializer_class = SelfUserSerializer
-    queryset = User.objects.all()
 
-    def get_queryset(self):
-        qs = super(SelfUserViewSet, self).get_queryset().filter(id=self.request.user.id)
-        return qs
+    def get_object(self):
+        return self.request.user
 
 
 class OtherUserViewSet(viewsets.ReadOnlyModelViewSet):
@@ -37,6 +35,11 @@ class SubscriptionsViewSet(viewsets.ReadOnlyModelViewSet):
 class LikeViewSet(viewsets.ModelViewSet):
     serializer_class = LikeSerializer
     queryset = Like.objects.all()
+
+
+class SubscribesViewSet(viewsets.ModelViewSet):
+    serializer_class = SubscribesSerializer
+    queryset = User.subscriptions.through.objects.all()
 
 
 class IndexView(TemplateView):

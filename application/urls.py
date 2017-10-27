@@ -23,17 +23,19 @@ from event import views as event_views
 from comment import views as comment_views
 from rest_framework.authtoken import views
 from core.views import IndexView
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 
 router = routers.DefaultRouter()
 router.register(r'posts', post_views.PostViewSet)
+router.register(r'news', post_views.SubscriptionsPostViewSet)
 router.register(r'books', post_views.BookViewSet)
-router.register(r'profile', core_views.SelfUserViewSet)
 router.register(r'user', core_views.OtherUserViewSet)
 router.register(r'subscriptions', core_views.SubscriptionsViewSet)
 router.register(r'events', event_views.EventViewSet)
 router.register(r'likes', core_views.LikeViewSet)
 router.register(r'comments', comment_views.CommentViewSet)
+router.register(r'subscribes', core_views.SubscribesViewSet)
 
 
 urlpatterns = [
@@ -41,7 +43,8 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api-token-auth/', views.obtain_auth_token),
     url(r'^social/', include('social_django.urls', namespace='social')),
-    url(r'^index/', IndexView.as_view()),
+    url(r'^index/', ensure_csrf_cookie(IndexView.as_view())),
+    url(r'api/v1/profile', core_views.SelfUserView.as_view()),
 ]
 
 if settings.DEBUG:

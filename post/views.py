@@ -1,5 +1,6 @@
 from rest_framework import viewsets, permissions
-
+from django.db.models import Q
+import operator
 from post.permissions import IsOwnerOrReadOnly
 from post.models import Post, Book
 from post.serializers import PostSerializer, BookSerializer
@@ -22,6 +23,22 @@ class PostViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
+
+
+class SubscriptionsPostViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = PostSerializer
+    queryset = Post.objects.all()
+    permission_classes = permissions.IsAuthenticated,
+
+    def get_queryset(self):
+        qs = super(SubscriptionsPostViewSet, self).get_queryset()
+        temp = []
+        subs = self.request.user.subscriptions.all()
+        for post in qs:
+            if post.author in subs:
+                temp.append(post)
+        qs = temp
+        return qs
 
 
 class BookViewSet(viewsets.ModelViewSet):

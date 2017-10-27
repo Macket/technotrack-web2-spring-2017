@@ -1,14 +1,14 @@
-.base {
+.b-base {
     position: absolute;
-    width: 90%;
+    width: 70%;
     height: auto;
     border: solid black 1px;
-    margin-left: 5%;
+    margin-left: 15%;
     margin-top: 2%;
     margin-bottom: 0;
 }
 
-.header {
+.b-header {
   position: relative;
   text-align: right;
   margin: 0;
@@ -16,15 +16,15 @@
   border: solid black 1px;
 }
 
-.side-menu {
+.b-side-menu {
   position: absolute;
-  width: 20%;
+  width: 25%;
   height: auto;
   display: inline-block;
   padding-top: 10px;
 }
 
-.side-menu-button {
+.b-side-menu-button {
   display: block;
   width: 90%;
   margin-top: 2%;
@@ -32,21 +32,13 @@
   margin-left: 5%;
 }
 
-.b-post-list {
+.b-wrapper {
     position: relative;
     width: 70%;
     height: auto;
-    margin-left: 20%;
+    margin-left: 25%;
     padding: 20px;
     border-left: solid black 1px;
-}
-
-.b-wrapper {
-    width: 600px;
-    margin: auto;
-    margin-top: 20px;
-    padding: 10px;
-    border: 1px solid black;
 }
 
 .b-form-field-wrapper {
@@ -60,17 +52,30 @@
 }
 
 .b-post__title {
-    display: flex;
     margin-bottom: 5px;
     align-items: center;
     font-weight: bold;
+    text-align: center;
+}
+
+.b-post__author {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+    font-style: italic;
+    text-align: right;
 }
 
 .b-post__likes {
   text-align: right;
-  margin-top: 5px;
+  margin-top: 10px;
   margin-bottom: 20px;
+}
 
+.b-post__comments {
+  text-align: right;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .b-avatar {

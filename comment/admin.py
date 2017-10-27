@@ -8,7 +8,7 @@ from core.admin import LikeAbleAdmin
 @admin.register(Comment)
 class CommentAdmin(LikeAbleAdmin):
 
-    readonly_fields = 'likes_count', 'edited_count',
+    readonly_fields = 'likes_count', 'edited_count', 'id'
 
 
 class CommentsInline(GenericStackedInline):

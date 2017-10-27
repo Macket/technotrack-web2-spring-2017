@@ -11,7 +11,7 @@ class User(AbstractUser):
 
     avatar = models.ImageField(upload_to='avatars', blank=True, null=True)
     objects_count = models.IntegerField(default=0)
-    subscriptions = models.ManyToManyField("self", default=None, symmetrical=False)
+    subscriptions = models.ManyToManyField("self", default=None, symmetrical=False, blank=True)
 
     class Meta:
         verbose_name = u'Пользователь'

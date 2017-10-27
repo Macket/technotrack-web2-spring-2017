@@ -18,8 +18,14 @@ class SelfUserSerializer(serializers.ModelSerializer):
 
 
 class LikeSerializer(serializers.ModelSerializer):
-    object = serializers.HyperlinkedRelatedField(many=False, view_name='object-detail', read_only=True)
 
     class Meta:
         model = Like
+        fields = '__all__'
+
+
+class SubscribesSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User.subscriptions.through
         fields = '__all__'
