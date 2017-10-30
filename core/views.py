@@ -12,15 +12,12 @@ class SelfUserView(generics.RetrieveUpdateDestroyAPIView):
         return self.request.user
 
 
-class OtherUserViewSet(viewsets.ReadOnlyModelViewSet):
+class AllUsersViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = OtherUserSerializer
     queryset = User.objects.all()
 
     def get_queryset(self):
-        qs = super(OtherUserViewSet, self).get_queryset()
-        if self.request.query_params.get('id'):
-            qs = qs.filter(id=self.request.query_params.get('id'))
-        return qs
+        return super(AllUsersViewSet, self).get_queryset()
 
 
 class SubscriptionsViewSet(viewsets.ReadOnlyModelViewSet):

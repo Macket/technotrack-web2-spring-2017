@@ -1,7 +1,29 @@
 import React from 'react';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import { publishPost } from '../actions/postsActions'
 import apiUrls from './../constants/apiUrls';
+import Form from 'grommet/components/Form';
+import Header from 'grommet/components/Header';
+import Heading from 'grommet/components/Heading'
+import FormFields from 'grommet/components/FormFields'
+import FormField from 'grommet/components/FormField'
+import Footer from 'grommet/components/Footer'
+import Button from 'grommet/components/Button'
+import TextInput from 'grommet/components/TextInput'
+import Section from 'grommet/components/Section'
+
 
 class PostForm extends React.Component {
+
+    static propTypes = {
+        isLoading: PropTypes.bool,
+        publishPost: PropTypes.func.isRequired,
+    };
+
+    static defaultProps = {
+    };
 
     state = {
         text: '',
@@ -9,43 +31,52 @@ class PostForm extends React.Component {
     };
 
     onChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
+        this.setState({[e.target.name]: e.target.value});
     };
 
     onClick = (e) => {
         e.preventDefault();
-        fetch(apiUrls.posts, {
-            method: 'POST',
-            credentials: 'include',
-            body: JSON.stringify(this.state),
-            headers: {
-                'content-type' : 'application/json',
-                'X-CSRFToken': document.cookie.match(/csrftoken=([^ ;]+)/)[1],
-            }
-        }).then(
-            body => body.json,
-        ).then(
-            json => console.log(json),
-        )
+        this.props.publishPost(apiUrls.posts, JSON.stringify(this.state));
     };
 
     render() {
         return (
-            <div className="b-create-form">
-                <form>
-                    <div className="b-form-field-wrapper">
-                        <input onChange={ this.onChange } value={this.state.title} className="b-form-field" type="text" name="title" placeholder="Заголовок" />
-                    </div>
-                    <div className="b-form-field-wrapper">
-                        <textarea onChange={ this.onChange } value={this.state.text} className="b-form-field" name="text" placeholder="Текст..." />
-                    </div>
-                    <div className="b-form-field-wrapper">
-                        <button onClick={ this.onClick }>Создать</button>
-                    </div>
-                </form>
-            </div>
+            <Section align='center' pad='large'>
+            <Form>
+                <Header size='small'>
+                    <Heading tag='h3' strong={true}>
+                        Новый пост
+                    </Heading>
+                </Header>
+                <FormFields>
+                    <TextInput onDOMChange={this.onChange } value={this.state.title} name="title" placeholder="Заголовок" />
+                    <FormField>
+                        <TextInput onDOMChange={this.onChange } value={this.state.text} name="text" placeholder="Текст..."  />
+                    </FormField>
+                </FormFields >
+                <Footer pad={{"vertical": "medium"}}>
+                    <Button label='Опубликовать'
+                            type='submit'
+                            primary={true}
+                            onClick={ this.onClick }/>
+                </Footer>
+            </Form>
+            </Section>
         );
     }
 }
 
-export default PostForm;
+const mapStateToProps = ({ postsReducer }) => {
+    return {
+        isLoading: postsReducer.isLoading,
+    }
+};
+
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ publishPost }, dispatch)
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostForm);
+

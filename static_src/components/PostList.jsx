@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import Section from 'grommet/components/Section'
 import Post from './Post';
-import { loadPosts } from './../actions/posts'
-import apiUrls from './../constants/apiUrls';
+import { loadPosts } from '../actions/postsActions'
 
 class PostList extends React.Component {
 
@@ -12,7 +12,7 @@ class PostList extends React.Component {
         postList: PropTypes.arrayOf(PropTypes.number),
         isLoading: PropTypes.bool,
         loadPosts: PropTypes.func.isRequired,
-
+        url: PropTypes.string.isRequired,
     };
 
     static defaultProps = {
@@ -21,7 +21,7 @@ class PostList extends React.Component {
     };
 
     componentDidMount() {
-        this.props.loadPosts(apiUrls.posts);
+        this.props.loadPosts(this.props.url);
     };
 
     render() {
@@ -32,17 +32,17 @@ class PostList extends React.Component {
             item => <Post key = {item} id = {item} />,
         );
         return (
-            <div className="b-post-list">
+            <Section align='center' pad='none'>
                 { posts }
-            </div>
+            </Section>
         );
     }
 }
 
-const mapStateToProps = ({ posts }) => {
+const mapStateToProps = ({ postsReducer }) => {
     return {
-        postList: posts.postList,
-        isLoading: posts.isLoading,
+        postList: postsReducer.postList,
+        isLoading: postsReducer.isLoading,
     }
 };
 

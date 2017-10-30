@@ -1,40 +1,82 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import apiUrls from './../constants/apiUrls';
+import List from 'grommet/components/List'
+import ListItem from 'grommet/components/ListItem'
 
+import { loadProfile } from '../actions/profileActions'
 
 
 class Profile extends React.Component {
     static propTypes = {
-        id: PropTypes.number.isRequired,
-        username: PropTypes.string.isRequired,
+        id: PropTypes.number,
+        username: PropTypes.string,
         first_name: PropTypes.string,
         last_name: PropTypes.string,
         email: PropTypes.string,
         date_joined: PropTypes.string,
         avatar: PropTypes.string,
+        loadProfile: PropTypes.func.isRequired,
     };
 
     static defaultProps = {
-        first_name: '',
-        last_name: '',
-        email: '',
-        date_joined: '',
+        id: 0,
+        username: '-',
+        first_name: '-',
+        last_name: '-',
+        email: '-',
+        date_joined: '-',
         avatar: '',
+    };
+
+    componentDidMount() {
+        this.props.loadProfile(apiUrls.profile);
     };
 
     render() {
         return (
-            <div className="b-post">
-                <img className="b-user__avatar" src={ this.props.avatar } />
-                <div className="b-user__username">Псевдоним: { this.props.username }</div>
-                <div className="b-user__first_name">Имя: { this.props.first_name }</div>
-                <div className="b-user__last_name">Фамилия: { this.props.last_name }</div>
-                <div className="b-user_email">email: { this.props.email }</div>
-                <div className="b-user__date_joined">С нами с { this.props.date_joined }</div>
-                <div className="b-user__id">id: { this.props.id }</div>
-            </div>
+
+            <List>
+                <ListItem justify='between' separator='horizontal'>
+                    <span>Псевдоним</span>
+                    <span className='secondary'>{ this.props.username }</span>
+                </ListItem>
+                <ListItem justify='between'>
+                    <span>Имя</span>
+                    <span className='secondary'>{ this.props.first_name }</span>
+                </ListItem>
+                <ListItem justify='between'>
+                    <span>Фамилия</span>
+                    <span className='secondary'>{ this.props.last_name }</span>
+                </ListItem>
+                <ListItem justify='between'>
+                    <span>email</span>
+                    <span className='secondary'>{ this.props.email }</span>
+                </ListItem>
+                <ListItem justify='between'>
+                    <span>Дата регистрации</span>
+                    <span className='secondary'>{ this.props.date_joined }</span>
+                </ListItem>
+                <ListItem justify='between'>
+                    <span>id</span>
+                    <span className='secondary'>{ this.props.id }</span>
+                </ListItem>
+            </List>
         );
     }
 }
 
-export default Profile;
+const mapStateToProps = ({ profileReducer }) => {
+    return {
+        ...profileReducer.profile[1],
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({loadProfile}, dispatch)
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

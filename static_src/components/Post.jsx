@@ -2,9 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 
-const author = {
-    name: 'Неизвестный автор'
-};
+import Paragraph from 'grommet/components/Paragraph'
+import Title from 'grommet/components/Title'
+import Heading from 'grommet/components/Heading'
+import Label from 'grommet/components/Label'
+import Box from 'grommet/components/Box'
+
 
 class Post extends React.Component {
     static propTypes = {
@@ -13,6 +16,7 @@ class Post extends React.Component {
         text: PropTypes.string,
         likes_count: PropTypes.number,
         comments_count: PropTypes.number,
+        username: PropTypes.string,
     };
 
     static defaultProps = {
@@ -23,24 +27,24 @@ class Post extends React.Component {
 
     render() {
         return (
-            <div className="b-post">
-                <div className="b-post__title">{ this.props.title }</div>
-                <div className="b-post__author">{ author.name }</div>
-                <div className="b-post__content">{ this.props.text }</div>
+            <Box size={{width: 'xlarge'}} pad='large'>
+                <Heading tag="h4" strong={true}>{ this.props.title }</Heading>
+                <Label>{ this.props.username }</Label>
+                <Paragraph width='large'>{ this.props.text }</Paragraph>
                 <div>
                     <div className="b-post__comments">Комментарии: { this.props.comments_count }</div>
-                    <div className="b-post__likes">Понравилось { this.props.likes_count }</div>
+                    <div className="b-post__likes">Понравилось: { this.props.likes_count }</div>
                 </div>
-            </div>
+            </Box>
         );
     }
 }
 
-const mapStateToProps = ({ posts }, ownProps) => {
+const mapStateToProps = (store, ownProps) => {
     return {
-        ...posts.posts[ownProps.id],
+        ...store.postsReducer.posts[ownProps.id],
+        ...store.usersReducer.users[store.postsReducer.posts[ownProps.id].author],
     }
-
 };
 
 const mapDispatchToProps = (dispatch) => {

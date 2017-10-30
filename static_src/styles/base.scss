@@ -24,12 +24,23 @@
   padding-top: 10px;
 }
 
-.b-side-menu-button {
+.b-side-menu-link {
   display: block;
   width: 90%;
   margin-top: 2%;
   margin-bottom: 2%;
   margin-left: 5%;
+  color: cornflowerblue;
+  text-decoration: none;
+}
+
+.b-side-menu-link:hover{
+  background: rgba(23,69,92,0.1);
+}
+
+.b-side-menu-link:visited{
+  color: cornflowerblue;
+  text-decoration: none;
 }
 
 .b-wrapper {
@@ -63,7 +74,7 @@
     margin-bottom: 10px;
     align-items: center;
     font-style: italic;
-    text-align: right;
+    text-align: left;
 }
 
 .b-post__likes {
