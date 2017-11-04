@@ -51,7 +51,7 @@ export const publishPost = (url, data) => {
                     type: SUCCESS_POST_PUBLISHING,
                     payload: (action, state, res) => {
                         return getJSON(res).then(
-                            (json) => normalize(json, [post]),
+                            (json) => normalize(json, post),
                         );
                     },
                 },

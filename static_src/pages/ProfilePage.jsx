@@ -11,7 +11,7 @@ class ProfilePage extends React.Component {
     // };
 
     render() {
-        return(
+        return (
             <Layout onSelect={ this.props.onMenuSelect }>
                 <h1>Профиль</h1>
                 <Profile />

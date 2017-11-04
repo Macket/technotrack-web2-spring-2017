@@ -9,9 +9,11 @@ from django.db import models
 
 class User(AbstractUser):
 
-    avatar = models.ImageField(upload_to='avatars', blank=True, null=True)
+    avatar = models.ImageField(upload_to='avatars', blank=True, null=True, default='avatars/no-avatar-icon.jpg')
     objects_count = models.IntegerField(default=0)
-    subscriptions = models.ManyToManyField("self", default=None, symmetrical=False, blank=True)
+    subscriptions = models.ManyToManyField(
+        "self", default=None, symmetrical=False, blank=True, related_name="subscribers"
+    )
 
     class Meta:
         verbose_name = u'Пользователь'

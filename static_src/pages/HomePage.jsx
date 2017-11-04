@@ -17,11 +17,11 @@ class HomePage extends React.Component {
     };
 
     render() {
-        return(
+        return (
             <Layout>
                 <Profile />
-                <PostForm/>
-                <PostList url={ this.props.url }/>
+                <PostForm />
+                <PostList url={ this.props.url } />
             </Layout>
         )
     }

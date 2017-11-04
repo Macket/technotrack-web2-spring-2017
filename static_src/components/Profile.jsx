@@ -70,8 +70,8 @@ class Profile extends React.Component {
 
 const mapStateToProps = ({ profileReducer }) => {
     return {
-        ...profileReducer.profile[1],
-    }
+        ...profileReducer.profile,
+    };
 };
 
 const mapDispatchToProps = (dispatch) => {

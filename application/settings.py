@@ -145,7 +145,8 @@ STATICFILES_DIRS = (
 )
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media')
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media/')
+print MEDIA_ROOT
 
 
 AUTHENTICATION_BACKENDS = (
@@ -177,7 +178,8 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-    )
+    ),
+    # 'PAGE_SIZE': 10,
 }
 
 LOGIN_REDIRECT_URL = '/api/v1/profile'

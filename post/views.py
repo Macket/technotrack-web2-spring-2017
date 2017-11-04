@@ -32,12 +32,14 @@ class SubscriptionsPostViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         qs = super(SubscriptionsPostViewSet, self).get_queryset()
-        temp = []
-        subs = self.request.user.subscriptions.all()
-        for post in qs:
-            if post.author in subs:
-                temp.append(post)
-        qs = temp
+        last_id = self.request.GET.get('last_id', 0)  # default = 0
+        qs = qs.filter(author__subscribers=self.request.user.id) #.filter(id__lte=last_id)[:10]
+        # temp = []
+        # subs = self.request.user.subscriptions.all()
+        # for post in qs:
+        #     if post.author in subs:
+        #         temp.append(post)
+        # qs = temp
         return qs
 
 

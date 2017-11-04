@@ -20,7 +20,7 @@ class UserList extends React.Component {
         isLoading: false,
     };
 
-    componentDidMount() {
+    componentWillMount() {
         this.props.loadUsers(this.props.url);
     };
 

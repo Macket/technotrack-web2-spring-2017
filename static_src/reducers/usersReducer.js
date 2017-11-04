@@ -30,7 +30,7 @@ export default function usersReducer(store = initialState, action) {
         }
         case ERROR_USER_LOADING: {
             return update(store, {
-                isLoading: {$set: false},
+                isLoading: { $set: false },
             });
         }
         default:

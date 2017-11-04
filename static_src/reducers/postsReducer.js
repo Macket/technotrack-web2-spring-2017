@@ -14,19 +14,26 @@ export default function postsReducer(store = initialStore, action) {
     switch (action.type) {
         case START_POST_LOADING || START_POST_PUBLISHING: {
             return update(store, {
-                isLoading: {$set: true},
+                isLoading: { $set: true },
             });
         }
-        case SUCCESS_POST_LOADING || SUCCESS_POST_PUBLISHING: {
+        case SUCCESS_POST_LOADING: {
             return update(store, {
-                isLoading: {$set: false},
+                isLoading: { $set: false },
                 postList: { $set: action.payload.result },
-                posts: {$merge: action.payload.entities.posts},
+                posts: { $merge: action.payload.entities.posts || {} }, // posts: {$merge: action.payload.entities.posts ? action.payload.entities.posts : {}},
             });
         }
         case ERROR_POST_LOADING || ERROR_POST_PUBLISHING: {
             return update(store, {
-                isLoading: {$set: false},
+                isLoading: { $set: false },
+            });
+        }
+        case SUCCESS_POST_PUBLISHING: {
+            return update(store, {
+                isLoading: { $set: false },
+                postList: { $unshift: [action.payload.result] },
+                posts: { $merge: action.payload.entities.posts },
             });
         }
         default:
