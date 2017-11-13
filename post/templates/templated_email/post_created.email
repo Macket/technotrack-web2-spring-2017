@@ -1,4 +1,4 @@
-{% block subject %} test-mail {% endblock %}
+{% block subject %} {{ subject }} {% endblock %}
 
 {% block html %}
 
@@ -63,7 +63,7 @@ table.vb-container.fullwidth {padding-left: 0;padding-right: 0;}</style><style t
 <!--[if (gte mso 9)|(lte ie 8)]><td align="left" valign="top" width="276"><![endif]-->
 <div style="display: inline-block; max-width: 276px; vertical-align: top; width: 100%;" class="mobile-full">
                     <table class="vb-content" border="0" cellspacing="9" cellpadding="0" width="276" style="border-collapse: separate;width: 100%;" align="left"><tbody><tr><td width="100%" valign="top" align="left" style="font-weight: normal; text-align: left; font-size: 13px; font-family: Arial, Helvetica, sans-serif; color: #ffffff;">
-                          <a style="text-decoration: underline; color: #ffffff;" target="_new" href="%5Bunsubscribe_link%5D">Unsubscribe</a>
+
 
                         </td>
                       </tr></tbody></table></div><!--[if (gte mso 9)|(lte ie 8)]>
@@ -72,7 +72,7 @@ table.vb-container.fullwidth {padding-left: 0;padding-right: 0;}</style><style t
 
                     <table class="vb-content" border="0" cellspacing="9" cellpadding="0" width="276" style="border-collapse: separate;width: 100%;text-align: right;" align="left"><tbody><tr><td width="100%" valign="top" style="font-weight: normal; font-size: 13px; font-family: Arial, Helvetica, sans-serif; color: #ffffff;">
                       <span style="color: #ffffff; text-decoration: underline;">
-                          <a href="%5Bshow_link%5D" style="text-decoration: underline; color: #ffffff;" target="_new">View in your browser</a>
+
                          </span>
                        </td>
                       </tr></tbody></table></div><!--[if (gte mso 9)|(lte ie 8)]>
@@ -91,19 +91,14 @@ table.vb-container.fullwidth {padding-left: 0;padding-right: 0;}</style><style t
                 <img border="0" hspace="0" vspace="0" width="534" class="mobile-full" alt="" style="border: 0px;display: block;vertical-align: top;max-width: 534px;width: 100%;height: auto;" src={{ image }}></td>
           </tr><tr><td><table align="left" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td style="font-size: 18px; font-family: Arial, Helvetica, sans-serif; color: #3f3f3f; text-align: left;">
                 <span style="color: #3f3f3f;">
-               { event.title }
+               {{ text }}
                 </span>
               </td>
             </tr><tr><td height="9" style="font-size: 1px; line-height: 1px;"> </td>
             </tr><tr><td align="left" class="long-text links-color" style="text-align: left; font-size: 13px; font-family: Arial, Helvetica, sans-serif; color: #3f3f3f;">
-                <p style="margin: 1em 0px;margin-bottom: 0px;margin-top: 0px;">Far far away, behind the word mountains, far from the countries <a href="" style="color: #3f3f3f;text-decoration: underline;">Vokalia and Consonantia</a>, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                <p style="margin: 1em 0px;margin-bottom: 0px;margin-top: 0px;"> Зайди на сайт, чтобы посмотреть: <a style=";" target="_new" href="http://localhost:8000/index/news/">на сайт</a></p>
               </td>
             </tr><tr><td height="13" style="font-size: 1px; line-height: 1px;"> </td>
-            </tr><tr><td valign="top">
-                <table cellpadding="0" border="0" align="left" cellspacing="0" class="mobile-full"><tbody><tr><td width="auto" valign="middle" bgcolor="#bfbfbf" align="center" height="26" style="font-size: 13px; font-family: Arial, Helvetica, sans-serif; text-align: center; color: #3f3f3f; font-weight: normal; padding-left: 18px; padding-right: 18px; background-color: #bfbfbf; border-radius: 4px;">
-                      <a style="text-decoration: none; color: #3f3f3f; font-weight: normal;" target="_new" href="">BUTTON</a>
-                    </td>
-                  </tr></tbody></table></td>
             </tr></tbody></table></td></tr></tbody></table></div>
 <!--[if (gte mso 9)|(lte ie 8)]></td></tr></table><![endif]-->
       </td>
@@ -111,7 +106,7 @@ table.vb-container.fullwidth {padding-left: 0;padding-right: 0;}</style><style t
 
 <!--[if (gte mso 9)|(lte ie 8)]><table align="center" border="0" cellspacing="0" cellpadding="0" width="570"><tr><td align="center" valign="top"><![endif]-->
         <div class="oldwebkit" style="max-width: 570px;">
-        <table width="570" style="border-collapse: separate;border-spacing: 9px;padding-left: 9px;padding-right: 9px;width: 100%;max-width: 570px;" border="0" cellpadding="0" cellspacing="9" class="vb-container halfpad" align="center"><tbody><tr><td class="long-text links-color" style="text-align: center; font-size: 13px; color: #919191; font-weight: normal; text-align: center; font-family: Arial, Helvetica, sans-serif;"><p style="margin: 1em 0px;margin-bottom: 0px;margin-top: 0px;">Email sent to <a href="mailto:%5Bmail%5D" style="color: #ccc;text-decoration: underline;">[mail]</a></p></td>
+        <table width="570" style="border-collapse: separate;border-spacing: 9px;padding-left: 9px;padding-right: 9px;width: 100%;max-width: 570px;" border="0" cellpadding="0" cellspacing="9" class="vb-container halfpad" align="center"><tbody><tr>
           </tr><tr><td style="text-align: center;">
               <a href="%5Bunsubscribe_link%5D" style="text-decoration: underline; color: #ffffff; text-align: center; font-size: 13px; font-weight: normal; font-family: Arial, Helvetica, sans-serif;" target="_new"><span>Unsubscribe</span></a>
             </td>
@@ -128,5 +123,5 @@ table.vb-container.fullwidth {padding-left: 0;padding-right: 0;}</style><style t
 {% endblock %}
 
 {% block text %}
-    Нет картинки
+    {{ text }}
 {% endblock %}

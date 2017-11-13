@@ -161,6 +161,7 @@ ADMINS = (
 )
 
 EMAIL_PORT = 1025
+EMAIL_EXTRAS_GNUPG_ENCODING = 'utf-8'
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.vk.VKOAuth2',

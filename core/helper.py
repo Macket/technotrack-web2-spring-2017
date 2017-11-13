@@ -34,5 +34,7 @@ def send_email(template, from_mail, recipient_list, context=None):
         context,
         from_mail,
         recipient_list,
+        # headers={'charset': 'utf-8'},
     )
+    # email.encoding = 'utf8'
     email.send()
