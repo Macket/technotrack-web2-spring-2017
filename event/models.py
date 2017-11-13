@@ -41,3 +41,4 @@ def make_event(title, author, object, type):
     event.object = object
     event.type = type
     event.save()
+    return event

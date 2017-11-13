@@ -1,8 +1,7 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Split from 'grommet/components/Split';
-import Box from 'grommet/components/Box'
 import Sidebar from 'grommet/components/Sidebar'
 import Header from 'grommet/components/Header'
 import Title from 'grommet/components/Title'
@@ -25,7 +24,7 @@ class Layout extends React.Component {
                     </Title>
                 </Header>
                 <Section pad='none'>
-                    <Split flex='right' fixed={true}>
+                    <Split flex='right' fixed={ true }>
                         <Sidebar colorIndex='light' size='medium' full={false}>
                             <Menu>
                                 <Link className="b-side-menu-link" to="/index/home/">Домашняя страница</Link>

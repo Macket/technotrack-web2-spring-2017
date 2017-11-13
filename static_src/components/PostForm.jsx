@@ -30,37 +30,38 @@ class PostForm extends React.Component {
         title: '',
     };
 
-    onChange = (e) => {
-        this.setState({[e.target.name]: e.target.value});
-    };
-
-    onClick = (e) => {
+    handleOnClick = (e) => {
         e.preventDefault();
         this.props.publishPost(apiUrls.posts, JSON.stringify(this.state));
+    };
+    handleOnChange = (e) => {
+        this.setState({ [e.target.name]: e.target.value });
     };
 
     render() {
         return (
-            <Section align='center' pad='large'>
-            <Form>
-                <Header size='small'>
-                    <Heading tag='h3' strong={true}>
-                        Новый пост
-                    </Heading>
-                </Header>
-                <FormFields>
-                    <TextInput onDOMChange={this.onChange } value={this.state.title} name="title" placeholder="Заголовок" />
-                    <FormField>
-                        <TextInput onDOMChange={this.onChange } value={this.state.text} name="text" placeholder="Текст..."  />
-                    </FormField>
-                </FormFields >
-                <Footer pad={{"vertical": "medium"}}>
-                    <Button label='Опубликовать'
-                            type='submit'
-                            primary={true}
-                            onClick={ this.onClick }/>
-                </Footer>
-            </Form>
+            <Section align="center" pad="large">
+                <Form>
+                    <Header size="small">
+                        <Heading tag="h3" strong={ true }>
+                            Новый пост
+                        </Heading>
+                    </Header>
+                    <FormFields>
+                        <TextInput onDOMChange={ this.handleOnChange } value={ this.state.title } name="title" placeholder="Заголовок" />
+                        <FormField>
+                            <TextInput onDOMChange={ this.handleOnChange } value={ this.state.text } name="text" placeholder="Текст..."  />
+                        </FormField>
+                    </FormFields >
+                    <Footer pad={ { 'vertical': 'medium' } }>
+                        <Button
+                            label="Опубликовать"
+                            type="submit"
+                            primary={ true }
+                            onClick={ this.handleOnClick }
+                        />
+                    </Footer>
+                </Form>
             </Section>
         );
     }
@@ -69,13 +70,11 @@ class PostForm extends React.Component {
 const mapStateToProps = ({ postsReducer }) => {
     return {
         isLoading: postsReducer.isLoading,
-    }
+    };
 };
 
 
-const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ publishPost }, dispatch)
-};
+const mapDispatchToProps = dispatch => bindActionCreators({ publishPost }, dispatch);
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostForm);

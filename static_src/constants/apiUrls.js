@@ -4,4 +4,5 @@ export default {
     profile: '/api/v1/profile/',
     users: '/api/v1/users/',
     subscribes: '/api/v1/subscribes/',
+    likes: '/api/v1/likes/',
 };

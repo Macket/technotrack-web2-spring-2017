@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 import ListItem from 'grommet/components/ListItem';
 import Image from 'grommet/components/Image';
 import Button from 'grommet/components/Button';
@@ -48,15 +49,15 @@ class UserListElem extends React.Component {
         return (
             <ListItem justify="between" separator="horizontal">
                 <span>
-                    <div className="b-icon" ><Image src={ this.props.avatar } /></div>
-                    {this.props.username}
+                    <Link to={ `/index/users/${this.props.id}` }><div className="b-icon" ><Image src={ this.props.avatar } /></div></Link>
+                    <Link className="b-side-menu-link" to={ `/index/users/${this.props.id}` }>{this.props.username}</Link>
                 </span>
                 <span className="secondary">
                     <Box size="small">
                         <Button
                             label={ label }
                             onClick={ this.subscribeClick }
-                            primary= { true }
+                            primary={ true }
                             secondary={ false }
                         />
                     </Box>

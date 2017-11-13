@@ -18,11 +18,9 @@ export const loadPosts = (url) => {
                 START_POST_LOADING,
                 {
                     type: SUCCESS_POST_LOADING,
-                    payload: (action, state, res) => {
-                        return getJSON(res).then(
-                            (json) => normalize(json, [post]),
-                        );
-                    },
+                    payload: (action, state, res) => getJSON(res).then(
+                        json => normalize(json, [post]),
+                    ),
                 },
                 ERROR_POST_LOADING,
             ],
@@ -49,11 +47,9 @@ export const publishPost = (url, data) => {
                 START_POST_PUBLISHING,
                 {
                     type: SUCCESS_POST_PUBLISHING,
-                    payload: (action, state, res) => {
-                        return getJSON(res).then(
-                            (json) => normalize(json, post),
-                        );
-                    },
+                    payload: (action, state, res) => getJSON(res).then(
+                        json => normalize(json, post),
+                    ),
                 },
                 ERROR_POST_PUBLISHING,
             ],

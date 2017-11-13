@@ -26,13 +26,20 @@ class PostList extends React.Component {
 
     render() {
         if (this.props.isLoading) {
-            return <div className="b-post-list">Загрузка...</div>
+            return <div className="b-post-list">Загрузка...</div>;
         }
         const posts = this.props.postList.map(
-            item => <Post key = {item} id = {item} />,
+            item => <Post key={ item } id={ item } />,
         );
+        if ({ posts }.posts.length === 0) {
+            return (
+                <Section align="center" pad="none">
+                    Нет ни одного поста
+                </Section>
+            );
+        }
         return (
-            <Section align='center' pad='none'>
+            <Section align="center" pad="none">
                 { posts }
             </Section>
         );
@@ -43,12 +50,10 @@ const mapStateToProps = ({ postsReducer }) => {
     return {
         postList: postsReducer.postList,
         isLoading: postsReducer.isLoading,
-    }
+    };
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ loadPosts }, dispatch)
-};
+const mapDispatchToProps = (dispatch) => bindActionCreators({ loadPosts }, dispatch);
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostList);

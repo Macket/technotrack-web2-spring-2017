@@ -9,7 +9,6 @@ const initialStore = {
 
 
 export default function profileReducer(store = initialStore, action) {
-
     switch (action.type) {
         case START_PROFILE_LOADING: {
             return update(store, {

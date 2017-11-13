@@ -31,6 +31,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+
+#: Only add pickle to this list if your broker is secured
+#: from unwanted access (see userguide/security.html)
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_TASK_SERIALIZER = 'json'
 
 # Application definition
 
@@ -50,6 +57,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'social_django',
     'webpack_loader',
+    'templated_email',
 ]
 
 MIDDLEWARE = [
@@ -148,6 +156,11 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media/')
 print MEDIA_ROOT
 
+ADMINS = (
+    ('makeev@phystech.edu', 'Ivan Makeev'),
+)
+
+EMAIL_PORT = 1025
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.vk.VKOAuth2',

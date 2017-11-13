@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import PostList from './../components/PostList';
 import PostForm from './../components/PostForm';
 import Layout from './../components/Layout';
-import Post from './../components/Post';
 import Profile from './../components/Profile';
 
 class HomePage extends React.Component {
@@ -23,7 +22,7 @@ class HomePage extends React.Component {
                 <PostForm />
                 <PostList url={ this.props.url } />
             </Layout>
-        )
+        );
     }
 }
 

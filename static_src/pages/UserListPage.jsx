@@ -15,9 +15,9 @@ class NewsPage extends React.Component {
     render() {
         return (
             <Layout>
-                <UserList url={ this.props.url }/>
+                <UserList url={ this.props.url } />
             </Layout>
-        )
+        );
     }
 }
 

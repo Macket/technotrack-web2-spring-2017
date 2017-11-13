@@ -2,6 +2,7 @@ from django.db.models.signals import post_init, pre_save, post_save
 
 from event.models import make_event, EventType
 from post.models import Post, Book
+from core.helper import send_email
 
 
 def post_post_init(instance, *args, **kwargs):
@@ -21,7 +22,9 @@ def post_pre_save(instance, created=False, *args, **kwargs):
 def post_post_save(instance, created=False, *args, **kwargs):
 
     if created:
-        make_event(instance.get_title_for_event(), instance.author, instance, EventType.Post)
+        event = make_event(instance.get_title_for_event(), instance.author, instance, EventType.Post)
+        for user in instance.author.subscribers:
+            send_email('post_created', 'a@a.a', [{user.email}, ], context={'event': event})
 
 
 def book_post_save(instance, created=False, *args, **kwargs):

@@ -8,7 +8,7 @@ from .models import User, Like
 class UserAdmin(BaseUserAdmin):
 
     fieldsets = BaseUserAdmin.fieldsets + (
-        (u'Дополнительно', {'fields': ('admin_avatar', 'avatar', 'subscriptions', 'objects_count')}),
+        (u'Дополнительно', {'fields': ('admin_avatar', 'avatar', 'subscriptions', 'objects_count' )}),
     )
     readonly_fields = ('admin_avatar', 'objects_count')
 

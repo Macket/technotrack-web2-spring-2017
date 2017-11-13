@@ -29,7 +29,7 @@ class UserList extends React.Component {
             return <div className="b-post-list">Загрузка...</div>
         }
         const users = this.props.userList.map(
-            item => <UserListElem key = {item} id = {item} />,
+            item => <UserListElem key={ item } id={ item } />,
         );
         return (
             <List>
@@ -39,7 +39,7 @@ class UserList extends React.Component {
     }
 }
 
-const mapStateToProps = ({ usersReducer }) => {
+const mapStateToProps = ({ usersReducer }, ) => {
     return {
         userList: usersReducer.userList,
         isLoading: usersReducer.isLoading,

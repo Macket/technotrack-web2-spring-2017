@@ -75,7 +75,7 @@ const mapStateToProps = ({ profileReducer }) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({loadProfile}, dispatch)
+    return bindActionCreators({ loadProfile }, dispatch)
 };
 
 
