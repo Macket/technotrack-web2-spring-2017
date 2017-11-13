@@ -1,5 +1,6 @@
+# -*- coding:utf-8 -*-
 from celery import task
-from time import sleep
+from celery.schedules import crontab
 
 from templated_email import InlineImage
 
@@ -24,3 +25,11 @@ def send_email_task(self, template, from_mail, recipient_id, text):
     except Exception as exc:
         raise self.retry(exc=exc, countdown=3, max_retries=3)
 
+
+@task.periodic_task(run_every=crontab(minute='30', hour='19'))
+def send_email_dispatch():
+    template = 'base'
+    from_mail = 'a@a.a'
+    text = 'Мы давно тебя не видели. Заходи почаще!'
+    for user in User.objects.all():
+        send_email_task.apply_async([template, from_mail, user.id, text])
