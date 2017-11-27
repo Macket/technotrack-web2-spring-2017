@@ -1,0 +1,1 @@
+{{ object.text }} {{ object.title }} {{ object.author }} {{ object.created }} {{ object.updated }}

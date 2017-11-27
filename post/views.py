@@ -1,9 +1,10 @@
+from django.db.models import QuerySet
 from rest_framework import viewsets, permissions
-from django.db.models import Q
-import operator
 from post.permissions import IsOwnerOrReadOnly
 from post.models import Post, Book
 from post.serializers import PostSerializer, BookSerializer
+from haystack.query import SearchQuerySet
+from haystack.inputs import AutoQuery
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -40,6 +41,12 @@ class SubscriptionsPostViewSet(viewsets.ReadOnlyModelViewSet):
         #     if post.author in subs:
         #         temp.append(post)
         # qs = temp
+
+        query = self.request.query_params.get('query')
+        if query:
+            sqs = SearchQuerySet().models(Post).filter_or(text=AutoQuery(query)).filter_or(title=AutoQuery(query))
+            results = [r.pk for r in sqs]
+            qs = qs.filter(pk__in=results)
         return qs
 
 

@@ -9,7 +9,7 @@ import apiUrls from './../constants/apiUrls';
 
 const Users = () => (
     <Switch>
-        <Route exact path="/index/users/" render={ props => <UserListPage { ...props } url={ apiUrls.users } /> }/>
+        <Route exact path="/index/users/" render={ props => <UserListPage { ...props } url={ apiUrls.users } /> } />
         <Route path="/index/users/:id" render={ props => <UserPage { ...props } url={ apiUrls.posts } /> } />
     </Switch>);
 

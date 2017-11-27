@@ -45,6 +45,7 @@ urlpatterns = [
     url(r'^social/', include('social_django.urls', namespace='social')),
     url(r'^index/', ensure_csrf_cookie(IndexView.as_view())),
     url(r'api/v1/profile', core_views.SelfUserView.as_view()),
+    url(r'^search/', include('haystack.urls', 'search')),
 ]
 
 if settings.DEBUG:

@@ -26,7 +26,7 @@ class UserList extends React.Component {
 
     render() {
         if (this.props.isLoading) {
-            return <div className="b-post-list">Загрузка...</div>
+            return <div className="b-post-list">Загрузка...</div>;
         }
         const users = this.props.userList.map(
             item => <UserListElem key={ item } id={ item } />,

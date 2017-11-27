@@ -58,6 +58,8 @@ INSTALLED_APPS = [
     'social_django',
     'webpack_loader',
     'templated_email',
+    'haystack',
+    'whoosh',
 ]
 
 MIDDLEWARE = [
@@ -154,7 +156,6 @@ STATICFILES_DIRS = (
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media/')
-print MEDIA_ROOT
 
 ADMINS = (
     ('makeev@phystech.edu', 'Ivan Makeev'),
@@ -210,3 +211,11 @@ WEBPACK_LOADER = {
 }
 
 
+# haystack
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+    },
+}
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.BaseSignalProcessor'

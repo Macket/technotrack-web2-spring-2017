@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Section from 'grommet/components/Section';
 import PostList from './../components/PostList';
 import Layout from './../components/Layout';
 import UserInfo from './../components/UserInfo';
-import Section from 'grommet/components/Section'
+
 
 class UserPage extends React.Component {
 
