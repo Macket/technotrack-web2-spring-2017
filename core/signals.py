@@ -34,14 +34,15 @@ for model in ModelWithAuthor.__subclasses__():
 
 
 def like_post_save(instance, *args, **kwargs):
-
+    print "22ewfsd"
     make_event(instance.get_title_for_event(), instance.author, instance, EventType.Like)
     instance.object.likes_count += 1
     instance.object.save()
+    print instance.object
+    print instance.object.likes_count
 
 
 def like_post_delete(instance, *args, **kwargs):
-
     if instance.object is not None and instance.object.likes_count > 0:
         instance.object.likes_count -= 1
         instance.object.save()

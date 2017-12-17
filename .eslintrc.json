@@ -3,7 +3,8 @@
   "parser": "babel-eslint",
   "plugins": [
     "react",
-    "import"
+    "import",
+    "jest"
   ],
   "rules": {
   "indent": ["error", 4, {

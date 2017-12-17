@@ -107,10 +107,11 @@ DATABASES = {
         'NAME': config.get('db', 'NAME'),
         'USER': config.get('db', 'USER'),
         'PASSWORD': config.get('db', 'PASSWORD'),
-        'HOST': 'localhost',
+        'TEST': {
+            'CHARSET': 'utf8',
+        },
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators

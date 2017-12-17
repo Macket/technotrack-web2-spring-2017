@@ -19,15 +19,15 @@ module.exports = {
 
     plugins: [
         new webpack.NoEmitOnErrorsPlugin(),
-        new BundleTracker({filename: './webpack-stats.json'}),
+        new BundleTracker({ filename: './webpack-stats.json' }),
     ],
 
-        module: {
+    module: {
         rules: [
             {
                 test: /\.(js|jsx)$/,
                 include: `${__dirname}/static_src`,
-                loader: 'babel-loader?presets[]=react&presets[]=es2015&presets[]=stage-1',
+                loader: 'babel-loader',
             },
             {
                 test: /\.css$/,

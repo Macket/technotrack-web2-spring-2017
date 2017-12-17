@@ -10,7 +10,7 @@ import Section from 'grommet/components/Section';
 import { loadPosts } from '../actions/postsActions';
 
 
-class SearchForm extends React.Component {
+export class SearchForm extends React.Component {
 
     static propTypes = {
         isLoading: PropTypes.bool,
